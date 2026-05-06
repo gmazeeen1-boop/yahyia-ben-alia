@@ -1,0 +1,695 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ابتدائية يحي بن علية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:    #d4a017;
+      --gold-l:  #f0c84a;
+      --navy:    #0d1b2a;
+      --white:   #ffffff;
+      --ease:    cubic-bezier(.4,0,.2,1);
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--navy);
+      overflow: hidden;
+    }
+
+    /* ════ HERO ════ */
+    .hero {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      background: url('school.jpg') center top / cover no-repeat;
+      transform: scale(1.06);
+      animation: drift 14s ease-in-out infinite alternate;
+    }
+    @keyframes drift {
+      from { transform: scale(1.06) translateY(0); }
+      to   { transform: scale(1.12) translateY(-12px); }
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top,  rgba(13,27,42,.98) 0%, transparent 45%),
+        linear-gradient(to bottom, rgba(13,27,42,.55) 0%, transparent 35%),
+        linear-gradient(135deg, rgba(13,27,42,.6), rgba(26,82,118,.35));
+    }
+
+    .top-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold-l), var(--gold), transparent);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: var(--white);
+      padding: 0 24px;
+      animation: fadeUp .9s var(--ease) both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(212,160,23,.45);
+      background: rgba(212,160,23,.1);
+      color: var(--gold-l);
+      font-size: .82rem;
+      font-weight: 700;
+      padding: 6px 20px;
+      border-radius: 50px;
+      margin-bottom: 28px;
+      backdrop-filter: blur(6px);
+    }
+
+    .school-name {
+      font-size: clamp(2.6rem, 7.5vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.15;
+      text-shadow: 0 6px 32px rgba(0,0,0,.5);
+      margin-bottom: 6px;
+    }
+
+    .school-name .highlight {
+      display: block;
+      background: linear-gradient(135deg, var(--gold), var(--gold-l));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .tagline {
+      font-size: clamp(.95rem, 2.2vw, 1.2rem);
+      color: rgba(255,255,255,.72);
+      margin: 18px auto 48px;
+      max-width: 500px;
+      line-height: 1.8;
+    }
+
+    .gold-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 48px;
+    }
+    .gold-line span {
+      width: 100px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold));
+    }
+    .gold-line span:last-child {
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+    .gold-line i { color: var(--gold); font-size: .9rem; }
+
+    .open-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-l));
+      color: var(--navy);
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      padding: 18px 48px;
+      border: none;
+      border-radius: 60px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+      box-shadow: 0 10px 40px rgba(212,160,23,.45);
+    }
+    .open-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,.35), transparent 70%);
+      transform: translateX(-100%);
+      transition: transform .55s ease;
+    }
+    .open-btn:hover::before { transform: translateX(100%); }
+    .open-btn:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 20px 56px rgba(212,160,23,.55);
+    }
+    .open-btn:active { transform: translateY(-1px) scale(.99); }
+    .open-btn i { font-size: 1.2rem; }
+
+    .bottom-label {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      animation: fadeUp 1.2s var(--ease) .3s both;
+    }
+    .school-seal {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,.45);
+      font-size: .8rem;
+      font-weight: 600;
+    }
+    .school-seal::before, .school-seal::after {
+      content: '';
+      width: 40px; height: 1px;
+      background: rgba(255,255,255,.15);
+    }
+
+    /* ════ MODAL ════ */
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .4s var(--ease);
+    }
+    .modal.open { opacity: 1; pointer-events: all; }
+
+    .modal-bg {
+      position: absolute;
+      inset: 0;
+      background: rgba(5,10,18,.92);
+      backdrop-filter: blur(12px);
+    }
+
+    .modal-box {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 860px;
+      background: #12192a;
+      border-radius: 20px;
+      border: 1px solid rgba(212,160,23,.2);
+      overflow: hidden;
+      box-shadow: 0 40px 100px rgba(0,0,0,.7);
+      transform: scale(.94);
+      transition: transform .4s var(--ease);
+      display: flex;
+      flex-direction: column;
+      max-height: 92vh;
+    }
+    .modal.open .modal-box { transform: scale(1); }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      flex-shrink: 0;
+    }
+    .modal-title {
+      color: var(--white);
+      font-weight: 800;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .modal-title i { color: var(--gold); }
+
+    .close-btn {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,.08);
+      border: none;
+      border-radius: 50%;
+      color: rgba(255,255,255,.7);
+      font-size: .9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .25s, transform .25s;
+    }
+    .close-btn:hover { background: #e74c3c; color: var(--white); transform: rotate(90deg); }
+
+    .viewer {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      background: #0a0f1a;
+      min-height: 440px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 2000px;
+      perspective-origin: 50% 50%;
+    }
+    .viewer::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        transparent, transparent 27px,
+        rgba(100,140,200,.05) 27px, rgba(100,140,200,.05) 28px
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      opacity: 0;
+      pointer-events: none;
+      transform-style: preserve-3d;
+      z-index: 1;
+    }
+    .slide.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* ── Forward flip (next page) ── */
+    .slide.flip-out-fwd {
+      animation: fwdOut .55s cubic-bezier(.4,0,.6,1) forwards;
+      transform-origin: left center;
+      z-index: 10; opacity: 1;
+    }
+    .slide.flip-in-fwd {
+      animation: fwdIn .55s cubic-bezier(.4,0,.6,1) forwards;
+      transform-origin: left center;
+      z-index: 5; opacity: 0;
+    }
+    @keyframes fwdOut {
+      0%   { transform: rotateY(0deg);   opacity: 1;  }
+      100% { transform: rotateY(-90deg); opacity: .1; }
+    }
+    @keyframes fwdIn {
+      0%   { transform: rotateY(90deg);  opacity: .1; }
+      100% { transform: rotateY(0deg);   opacity: 1;  }
+    }
+
+    /* ── Backward flip (prev page) ── */
+    .slide.flip-out-bwd {
+      animation: bwdOut .55s cubic-bezier(.4,0,.6,1) forwards;
+      transform-origin: right center;
+      z-index: 10; opacity: 1;
+    }
+    .slide.flip-in-bwd {
+      animation: bwdIn .55s cubic-bezier(.4,0,.6,1) forwards;
+      transform-origin: right center;
+      z-index: 5; opacity: 0;
+    }
+    @keyframes bwdOut {
+      0%   { transform: rotateY(0deg);  opacity: 1;  }
+      100% { transform: rotateY(90deg); opacity: .1; }
+    }
+    @keyframes bwdIn {
+      0%   { transform: rotateY(-90deg); opacity: .1; }
+      100% { transform: rotateY(0deg);   opacity: 1;  }
+    }
+
+    .slide img {
+      max-width: 100%;
+      max-height: 400px;
+      border-radius: 6px;
+      box-shadow:
+        0 8px 40px rgba(0,0,0,.7),
+        -4px 0 18px rgba(0,0,0,.4),
+         4px 0 18px rgba(0,0,0,.4);
+      object-fit: contain;
+      cursor: zoom-in;
+      transition: box-shadow .3s ease;
+      position: relative; z-index: 2;
+    }
+    .slide img:hover {
+      box-shadow:
+        0 12px 50px rgba(0,0,0,.8),
+        -6px 0 24px rgba(0,0,0,.5),
+         6px 0 24px rgba(0,0,0,.5);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 16px 24px;
+      border-top: 1px solid rgba(255,255,255,.07);
+      flex-shrink: 0;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      color: var(--white);
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      font-size: .88rem;
+      padding: 9px 22px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background .25s, border-color .25s;
+    }
+    .nav-btn:hover:not(:disabled) { background: #1a5276; border-color: #1a5276; }
+    .nav-btn:disabled { opacity: .3; cursor: not-allowed; }
+
+    .counter {
+      color: rgba(255,255,255,.6);
+      font-size: .88rem;
+      font-weight: 700;
+      min-width: 110px;
+      text-align: center;
+    }
+
+    .thumbs {
+      display: flex;
+      gap: 8px;
+      padding: 12px 20px;
+      overflow-x: auto;
+      background: rgba(0,0,0,.25);
+      border-top: 1px solid rgba(255,255,255,.04);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,.15) transparent;
+      flex-shrink: 0;
+    }
+
+    .thumb {
+      flex-shrink: 0;
+      width: 60px;
+      height: 72px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,.1);
+      cursor: pointer;
+      transition: border-color .25s, transform .25s;
+    }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .thumb:hover  { border-color: rgba(212,160,23,.5); transform: translateY(-2px); }
+    .thumb.active { border-color: var(--gold); }
+
+    /* zoom */
+    .zoom-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0,0,0,.96);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+      cursor: zoom-out;
+      padding: 20px;
+    }
+    .zoom-overlay.open { opacity: 1; pointer-events: all; }
+    .zoom-overlay img {
+      max-width: 100%;
+      max-height: 95vh;
+      border-radius: 6px;
+      object-fit: contain;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-photo"></div>
+    <div class="hero-overlay"></div>
+    <div class="top-bar"></div>
+
+    <div class="hero-content">
+      <div class="badge">
+        <i class="fas fa-star"></i>
+        الجمهورية الجزائرية الديمقراطية الشعبية
+      </div>
+
+      <h1 class="school-name">
+        ابتدائية
+        <span class="highlight">يحي بن علية</span>
+      </h1>
+
+      <div class="gold-line">
+        <span></span>
+        <i class="fas fa-graduation-cap"></i>
+        <span></span>
+      </div>
+
+      <p class="tagline">نبني أجيالاً واعدة على أسس العلم والمعرفة والقيم الأصيلة</p>
+
+      <button class="open-btn" id="openBtn">
+        <i class="fas fa-book-open"></i>
+        تصفّح الكراس المصور
+      </button>
+    </div>
+
+    <div class="bottom-label">
+      <div class="school-seal">
+        <i class="fas fa-shield-alt" style="color:var(--gold);font-size:.9rem;"></i>
+        &nbsp;مؤسسة تعليمية معتمدة
+      </div>
+    </div>
+  </section>
+
+  <!-- FLIPBOOK MODAL -->
+  <div class="modal" id="modal">
+    <div class="modal-bg" id="modalBg"></div>
+    <div class="modal-box">
+
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fas fa-book-open"></i>
+          الكراس المصور – ابتدائية يحي بن علية
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span id="counterBadge" style="background:rgba(212,160,23,.15);border:1px solid rgba(212,160,23,.3);color:#f0c84a;font-size:.78rem;font-weight:700;padding:3px 12px;border-radius:20px;">1 / 49</span>
+          <button class="close-btn" id="closeBtn"><i class="fas fa-times"></i></button>
+        </div>
+      </div>
+
+      <div style="height:3px;background:rgba(255,255,255,.07);flex-shrink:0;">
+        <div id="progressFill" style="height:100%;background:linear-gradient(90deg,#d4a017,#f0c84a);width:2%;transition:width .45s ease;"></div>
+      </div>
+
+      <div class="viewer" id="viewer">
+        <div id="swipeHint" style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.35);font-size:.72rem;display:flex;align-items:center;gap:6px;pointer-events:none;z-index:99;">
+          <i class="fas fa-hand-point-left"></i> اسحب لتصفح الصفحات
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="nav-btn" id="prevBtn">
+          <i class="fas fa-chevron-right"></i> السابق
+        </button>
+        <span class="counter" id="counter">الصفحة 1 / 1</span>
+        <button class="nav-btn" id="nextBtn">
+          التالي <i class="fas fa-chevron-left"></i>
+        </button>
+      </div>
+
+      <div class="thumbs" id="thumbs"></div>
+    </div>
+  </div>
+
+  <!-- ZOOM -->
+  <div class="zoom-overlay" id="zoomOverlay">
+    <button id="zoomClose" style="position:absolute;top:18px;right:18px;width:38px;height:38px;background:rgba(255,255,255,.1);border:none;border-radius:50%;color:white;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s;"><i class="fas fa-times"></i></button>
+    <img id="zoomImg" src="" alt="zoom" />
+  </div>
+
+  <script>
+    /* ═══════════════════════════════════════════════════════
+       ضع صور الكراس المسحوبة ضوئياً في مجلد  pages/
+       أسماء الملفات:  page01.jpg  page02.jpg  ...  page49.jpg
+    ═══════════════════════════════════════════════════════ */
+
+    const TOTAL = 49;
+    const PAGES = Array.from({ length: TOTAL }, (_, i) =>
+      'pages/page' + String(i + 1).padStart(2, '0') + '.jpg'
+    );
+
+    const ANIM_MS = 560;
+    let current     = 0;
+    let isAnimating = false;
+
+    const viewer       = document.getElementById('viewer');
+    const thumbsEl     = document.getElementById('thumbs');
+    const counter      = document.getElementById('counter');
+    const counterBadge = document.getElementById('counterBadge');
+    const prevBtn      = document.getElementById('prevBtn');
+    const nextBtn      = document.getElementById('nextBtn');
+    const progressFill = document.getElementById('progressFill');
+    const swipeHint    = document.getElementById('swipeHint');
+
+    /* ── build slides & thumbnails ── */
+    function build() {
+      viewer.querySelectorAll('.slide').forEach(s => s.remove());
+      thumbsEl.innerHTML = '';
+      current = 0;
+
+      PAGES.forEach((src, i) => {
+        const slide = document.createElement('div');
+        slide.className = 'slide' + (i === 0 ? ' active' : '');
+        const img = document.createElement('img');
+        img.src     = src;
+        img.alt     = 'صفحة ' + (i + 1);
+        img.loading = i < 3 ? 'eager' : 'lazy';
+        img.addEventListener('click', () => openZoom(src));
+        slide.appendChild(img);
+        viewer.appendChild(slide);
+
+        const thumb = document.createElement('div');
+        thumb.className = 'thumb' + (i === 0 ? ' active' : '');
+        const ti = document.createElement('img');
+        ti.src = src; ti.alt = ''; ti.loading = 'lazy';
+        thumb.appendChild(ti);
+        thumb.addEventListener('click', () => { if (!isAnimating) goTo(i); });
+        thumbsEl.appendChild(thumb);
+      });
+
+      updateUI();
+      // fade out swipe hint after 4 s
+      setTimeout(() => { if (swipeHint) swipeHint.style.opacity = '0'; }, 4000);
+    }
+
+    /* ── navigate to page idx ── */
+    function goTo(idx, dir) {
+      if (idx < 0 || idx >= PAGES.length || idx === current || isAnimating) return;
+      isAnimating = true;
+
+      const direction = dir !== undefined ? dir : (idx > current ? 'fwd' : 'bwd');
+      const allSlides = viewer.querySelectorAll('.slide');
+      const allThumbs = thumbsEl.querySelectorAll('.thumb');
+
+      const outCls = direction === 'fwd' ? 'flip-out-fwd' : 'flip-out-bwd';
+      const inCls  = direction === 'fwd' ? 'flip-in-fwd'  : 'flip-in-bwd';
+
+      allSlides[current].classList.remove('active');
+      allSlides[current].classList.add(outCls);
+      allThumbs[current].classList.remove('active');
+
+      const incoming = allSlides[idx];
+      incoming.classList.add(inCls);
+
+      const prev = current;
+      current = idx;
+
+      setTimeout(() => {
+        allSlides[prev].classList.remove(outCls);
+        incoming.classList.remove(inCls);
+        incoming.classList.add('active');
+        allThumbs[current].classList.add('active');
+        allThumbs[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        isAnimating = false;
+        updateUI();
+      }, ANIM_MS);
+    }
+
+    function updateUI() {
+      const n = current + 1;
+      const label = 'الصفحة ' + n + ' / ' + PAGES.length;
+      counter.textContent      = label;
+      counterBadge.textContent = n + ' / ' + PAGES.length;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === PAGES.length - 1;
+      progressFill.style.width = ((n / PAGES.length) * 100) + '%';
+    }
+
+    prevBtn.addEventListener('click', () => goTo(current - 1, 'bwd'));
+    nextBtn.addEventListener('click', () => goTo(current + 1, 'fwd'));
+
+    /* ── open / close modal ── */
+    const modal = document.getElementById('modal');
+
+    document.getElementById('openBtn').addEventListener('click', () => {
+      build();
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('closeBtn').addEventListener('click', closeModal);
+    document.getElementById('modalBg').addEventListener('click', closeModal);
+
+    /* ── keyboard navigation ── */
+    document.addEventListener('keydown', e => {
+      if (modal.classList.contains('open')) {
+        if (e.key === 'ArrowLeft')  goTo(current + 1, 'fwd');
+        if (e.key === 'ArrowRight') goTo(current - 1, 'bwd');
+        if (e.key === 'Escape')     closeModal();
+      }
+      const zo = document.getElementById('zoomOverlay');
+      if (zo.classList.contains('open') && e.key === 'Escape') zo.classList.remove('open');
+    });
+
+    /* ── touch / swipe ── */
+    let touchStartX = null;
+    viewer.addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    viewer.addEventListener('touchend', e => {
+      if (touchStartX === null) return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      touchStartX = null;
+      if (Math.abs(dx) < 45) return;
+      if (dx > 0) goTo(current - 1, 'bwd'); // swipe right → previous
+      else        goTo(current + 1, 'fwd'); // swipe left  → next
+    }, { passive: true });
+
+    /* ── zoom ── */
+    function openZoom(src) {
+      document.getElementById('zoomImg').src = src;
+      document.getElementById('zoomOverlay').classList.add('open');
+    }
+    document.getElementById('zoomOverlay').addEventListener('click', e => {
+      if (e.target !== document.getElementById('zoomClose'))
+        document.getElementById('zoomOverlay').classList.remove('open');
+    });
+    document.getElementById('zoomClose').addEventListener('click', () =>
+      document.getElementById('zoomOverlay').classList.remove('open')
+    );
+  </script>
+
+</body>
+</html>
